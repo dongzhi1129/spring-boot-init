@@ -1,5 +1,5 @@
-def Gloable_Service_Name = 'spring-boot-init'
-def Gloable_User_Name='dongzhi1129'
+def Gloable_Service_Name = "spring-boot-init"
+def Gloable_User_Name="dongzhi1129"
 pipeline {
    agent any
    parameters {
@@ -23,7 +23,7 @@ pipeline {
       stage('SCM') {
          steps { dir("${WORKSPACE}/SCM"){
          		script {
-         			def repoUrl='https://github.com/${Gloable_User_Name}/${Gloable_Service_Name}.git'
+         			def repoUrl="https://github.com/${Gloable_User_Name}/${Gloable_Service_Name}.git"
 		            git branch:params.Git_Branch,url:repoUrl
 		            def commitId = sh returnStdout:true,script:'git rev-parse --short HEAD'
 		            if(params.Git_Tag != "") {
