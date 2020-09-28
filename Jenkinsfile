@@ -1,5 +1,6 @@
 def Gloable_Service_Name = "spring-boot-init"
 def Gloable_User_Name="dongzhi1129"
+def Gloable_version
 pipeline {
    agent any
    parameters {
@@ -30,7 +31,7 @@ pipeline {
 		                 def Gloable_tag = params.Git_Tag
 		                 sh "cd ${WORKSPACE}/SCM && git checkout ${Gloable_tag}"
 		             }
-		             def Gloable_version = (params.Git_Tag != ""?params.Git_Tag:"latest")
+		             Gloable_version = (params.Git_Tag != ""?params.Git_Tag:"latest")
 		             print Gloable_version
          		}
              
@@ -39,5 +40,14 @@ pipeline {
             
          }
       }
+
+	  stage('buildImage'){
+		  steps {dir("${WORKSPACE}/SCM} {
+			  script{
+				  sh "cd ${WORKSPACE}/SCM && chmod 755 gradlew && ./gradlew -version"
+				  sh "cd ${WORKSPACE}/SCM && ls -a && ./gradlew -Pversion= ${Gloable_version} -PimageRepo='snapshot' clean build dockerPush -x test"
+			  }
+		  }
+	  }
    }
 }

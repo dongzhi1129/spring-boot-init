@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.3.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
+	id 'com.palantir.docker' version '0.21.0'
 }
 
 group = 'com.pipeline'
@@ -19,6 +20,20 @@ dependencies {
 	}
 }
 
+def imageRepo = project.hasProperty('imageRepo')?project.hasProperty('imageRepo'):"snapshot"
+println imageRepo
+def deployBasePath = 'deloy/image/'
+def dockerJfrogURI = "personal-web-${imageRepo}-docker-loca/self/spring-boot-init:${G_VERSION}"
+def dockerFileName = deployBasePath + "Dockerfile"
+println dockerJfrogURI
+
+docker {
+	name dockerJfrogURI
+	dockerfile file(dockerFileName)
+	buildArgs([PARAM_PACKAGE_NAME:(project.name + "-" + G_VERSION + ".jar"),PARAM_APP_NAME:project.name])
+	pull true
+	noCache true
+}
 test {
 	useJUnitPlatform()
 }
