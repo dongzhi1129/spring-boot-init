@@ -20,6 +20,7 @@ dependencies {
 	}
 }
 
+def G_VERSION =  project.hasProperty('version')?project.hasProperty('version'):"latest"
 def imageRepo = project.hasProperty('imageRepo')?project.hasProperty('imageRepo'):"snapshot"
 println imageRepo
 def deployBasePath = 'deloy/image/'
