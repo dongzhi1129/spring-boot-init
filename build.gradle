@@ -6,7 +6,6 @@ plugins {
 }
 
 group = 'com.pipeline'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -20,7 +19,10 @@ dependencies {
 	}
 }
 
-def G_VERSION =  project.hasProperty('version')?project.hasProperty('version'):"latest"
+def G_VERSION =  (project.hasProperty('version') && project.getProperty('version') !="unspecified")?project.getProperty('version'):"latest"
+println G_VERSION
+version = G_VERSION
+
 def imageRepo = project.hasProperty('imageRepo')?project.hasProperty('imageRepo'):"snapshot"
 println imageRepo
 def deployBasePath = 'deloy/image/'
