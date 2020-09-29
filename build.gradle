@@ -23,7 +23,7 @@ def G_VERSION =  (project.hasProperty('version') && project.getProperty('version
 println G_VERSION
 version = G_VERSION
 
-def imageRepo = project.hasProperty('imageRepo')?project.hasProperty('imageRepo'):"snapshot"
+def imageRepo = project.hasProperty('imageRepo')?project.getProperty('imageRepo'):"snapshot"
 println imageRepo
 def deployBasePath = 'deloy/image/'
 def dockerJfrogURI = "personal-web-${imageRepo}-docker-loca/self/spring-boot-init:${G_VERSION}"
