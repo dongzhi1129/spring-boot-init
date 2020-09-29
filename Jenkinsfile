@@ -9,7 +9,6 @@ pipeline {
    }
    tools{
        gradle 'Gradle_6.6.1'
-       docker 'docker'
    } 
 
    stages {
