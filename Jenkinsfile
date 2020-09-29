@@ -45,7 +45,7 @@ pipeline {
 		  steps {dir("${WORKSPACE}/SCM")} {
 			  script{
 				  sh "cd ${WORKSPACE}/SCM && chmod 755 gradlew && ./gradlew -version"
-				  sh "cd ${WORKSPACE}/SCM && ls -a && ./gradlew -Pversion=${Gloable_version} -PimageRepo='snapshot' clean build dockerPush -x test"
+				  sh "cd ${WORKSPACE}/SCM && ls -a && ./gradlew --stacktrace -Pversion=${Gloable_version} -PimageRepo='snapshot' clean build dockerPush -x test"
 			  }
 		  }
 	  }
