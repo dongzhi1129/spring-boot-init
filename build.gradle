@@ -18,9 +18,6 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
-task enviroment(type:Exec){
-	commandLine 'env'
-}
 
 def G_VERSION =  (project.hasProperty('version') && project.getProperty('version') !="unspecified")?project.getProperty('version'):"latest"
 println G_VERSION
@@ -32,6 +29,12 @@ def deployBasePath = 'deloy/image/'
 def dockerJfrogURI = "personal-web-${imageRepo}-docker-local/self/spring-boot-init:${G_VERSION}"
 def dockerFileName = deployBasePath + "Dockerfile"
 println dockerJfrogURI
+
+ File dir = new File("${project.buildDir}/docker")
+ if(!dir.exists()) {
+     dir.mkdirs()
+     println "${project.buildDir}/docker"
+ }
 
 docker {
 	name dockerJfrogURI
