@@ -18,6 +18,9 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
+task dok{
+	new ProcessBuilder("docker").start()
+}
 
 def G_VERSION =  (project.hasProperty('version') && project.getProperty('version') !="unspecified")?project.getProperty('version'):"latest"
 println G_VERSION
