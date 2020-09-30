@@ -8,7 +8,7 @@ pipeline {
        string(name:'Git_Tag',defaultValue:'',description:'')
    }
    tools{
-       gradle 'Gradle_5.6'
+       gradle 'Gradle_5.0'
    } 
 
    stages {
